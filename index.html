@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d3552" />
+  <title>IELTS REP - Real Exam Passages</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      line-height: 1.5;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    /* Navbar */
+    .navbar {
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 16px;
+    }
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+    }
+    .logo-text span { display: block; }
+    .logo-text .small { font-size: 10px; color: #64748b; line-height: 1.1; }
+    .logo-text .big { font-size: 13px; font-weight: 700; color: #0d3552; line-height: 1.1; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0d3552 0%, #1a5276 100%);
+      color: #fff;
+      padding: 32px 16px 40px;
+    }
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #2563eb;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+      transform: rotate(-2deg);
+    }
+    .hero h1 {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hero h1 .orange { color: #fb923c; }
+    .hero p {
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-bottom: 20px;
+      max-width: 340px;
+    }
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f59e0b;
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(245,158,11,0.4);
+    }
+    .btn-start:active { transform: scale(0.97); }
+    .features-list {
+      margin-top: 24px;
+      display: grid;
+      gap: 8px;
+    }
+    .features-list div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #e0f2fe;
+    }
+    .features-list .check { color: #4ade80; font-weight: 700; }
+
+    /* Section */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px 16px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+    .section-header h2 {
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .section-header p {
+      font-size: 13px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    /* Test cards */
+    .tests-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (min-width: 640px) {
+      .tests-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .tests-grid { grid-template-columns: repeat(4, 1fr); }
+    }
+    .test-card {
+      background: #fff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .test-card-img {
+      height: 80px;
+      background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+      position: relative;
+    }
+    .badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      color: #fff;
+    }
+    .badge-free { background: #22c55e; }
+    .badge-prime { background: #f59e0b; }
+    .test-card-body { padding: 12px; }
+    .test-card-body h3 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 2px;
+    }
+    .test-card-body .title {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 8px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: 32px;
+    }
+    .test-card-body .meta {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-bottom: 10px;
+    }
+    .btn-test {
+      display: block;
+      width: 100%;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-free {
+      background: #0d3552;
+      color: #fff;
+    }
+    .btn-locked {
+      background: #f1f5f9;
+      color: #94a3b8;
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Prime Banner */
+    .prime-banner {
+      background: linear-gradient(135deg, #0d3552, #1a5276);
+      border-radius: 16px;
+      padding: 24px 20px;
+      color: #fff;
+      margin: 8px 0 24px;
+    }
+    .prime-banner h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .prime-banner h3 .orange { color: #fb923c; }
+    .prime-banner .desc {
+      font-size: 13px;
+      color: #bfdbfe;
+      margin-bottom: 12px;
+    }
+    .prime-checks {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: 12px;
+      color: #e0f2fe;
+      margin-bottom: 16px;
+    }
+    .price-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .price {
+      background: rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 10px 18px;
+      text-align: center;
+    }
+    .price .amount { font-size: 28px; font-weight: 800; }
+    .price .label { font-size: 11px; color: #bfdbfe; }
+    .btn-unlock {
+      background: #f59e0b;
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(245,158,11,0.35);
+    }
+
+    /* Payment Section */
+    .payment-section {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 24px 16px;
+      margin-bottom: 28px;
+    }
+    .payment-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .payment-section .sub {
+      text-align: center;
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 20px;
+    }
+    .bangla-box {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0d3552;
+      margin-bottom: 16px;
+    }
+    .number-box {
+      background: #f8fafc;
+      border: 2px dashed #cbd5e1;
+      border-radius: 14px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .number-box .label {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .number-box .number {
+      font-size: 28px;
+      font-weight: 800;
+      color: #0d3552;
+      letter-spacing: 1px;
+      margin: 8px 0;
+    }
+    .number-box .amount {
+      font-size: 14px;
+      color: #475569;
+      margin-bottom: 12px;
+    }
+    .btn-copy {
+      background: #0d3552;
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-copy.copied {
+      background: #16a34a;
+    }
+    .steps {
+      font-size: 13px;
+      color: #475569;
+      padding-left: 4px;
+    }
+    .steps li {
+      margin-bottom: 6px;
+      list-style: decimal;
+      margin-left: 18px;
+    }
+    .warning {
+      font-size: 12px;
+      color: #dc2626;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    /* Features bottom */
+    .features-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      text-align: center;
+      padding: 8px 0 32px;
+    }
+    @media (min-width: 640px) {
+      .features-bottom { grid-template-columns: repeat(5, 1fr); }
+    }
+    .feat-item .icon { font-size: 24px; margin-bottom: 6px; }
+    .feat-item h4 { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+    .feat-item p { font-size: 11px; color: #64748b; }
+
+    /* Footer */
+    footer {
+      background: #0d3552;
+      color: #e0f2fe;
+      padding: 28px 16px 20px;
+      text-align: center;
+    }
+    footer .logo-f {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    footer .logo-f img {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+    }
+    footer p { font-size: 12px; color: #94a3b8; margin-top: 12px; }
+
+    /* Show more */
+    .show-more-wrap {
+      text-align: center;
+      margin-top: 16px;
+    }
+    .btn-more {
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      color: #0d3552;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.jpg" alt="IELTS REP" />
+        <div class="logo-text">
+          <span class="small">IELTS RECENT EXAM</span>
+          <span class="big">IELTS REP</span>
+        </div>
+      </a>
+      <a href="#payment" class="btn-start" style="padding:8px 16px;font-size:13px;">Prime ৳299</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">REAL EXAM PASSAGES</div>
+      <h1>IELTS RECENT EXAM<br /><span class="orange">EXAM PASSAGE</span></h1>
+      <p>Practice with real IELTS Reading passages from recent exams. Improve your skills, boost your score.</p>
+      <a href="#tests" class="btn-start">▶ Start Practice →</a>
+
+      <div class="features-list">
+        <div><span class="check">✓</span> Recent Exam Reported Passages</div>
+        <div><span class="check">✓</span> IELTS Style Questions</div>
+        <div><span class="check">✓</span> Detailed Answers & Explanation</div>
+        <div><span class="check">✓</span> Track Your Progress</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent Tests -->
+  <section class="section" id="tests">
+    <div class="section-header">
+      <div>
+        <h2>🔥 Recent Exam Passages</h2>
+        <p>Access the latest IELTS reading passages from recent exams.</p>
+      </div>
+    </div>
+
+    <div class="tests-grid" id="testsGrid">
+      <!-- Tests will be injected by JS -->
+    </div>
+
+    <div class="show-more-wrap" style="display:none;">
+      <button class="btn-more" id="showMoreBtn" onclick="showMore()">আরও টেস্ট দেখুন ↓</button>
+    </div>
+  </section>
+
+  <!-- Prime Banner -->
+  <section class="section">
+    <div class="prime-banner">
+      <h3>👑 IELTS REP <span class="orange">PRIME</span></h3>
+      <p class="desc">Unlock the full Reading practice library</p>
+      <div class="prime-checks">
+        <span>✓ All Recent Exam Passages</span>
+        <span>✓ Full Test Access</span>
+        <span>✓ Lifetime Access</span>
+      </div>
+      <div class="price-box">
+        <div class="price">
+          <div class="amount">৳299</div>
+          <div class="label">One Time Payment</div>
+        </div>
+        <a href="#payment" class="btn-unlock">Unlock Prime →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Payment Section -->
+  <section class="section" id="payment">
+    <div class="payment-section">
+      <h2>👑 Get Prime Access — ৳299</h2>
+      <p class="sub">One-time payment · Lifetime access to all 91 tests</p>
+
+      <div class="bangla-box">
+        প্রিমিয়াম অ্যাক্সেস আনলক করতে IELTS REP টিমের সাথে কথা বলুন।<br>
+        ৳২৯৯ দিয়ে সব ৯১টি টেস্ট আনলক করতে পারবেন।
+      </div>
+
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:20px;text-align:center;">
+        <p style="font-size:14px;color:#475569;margin-bottom:8px;">
+          Prime Access পেতে চাইলে নিচের বাটনে ক্লিক করে আমাদের ইমেইল পাঠান।
+        </p>
+        <p style="font-size:13px;color:#64748b;">
+          আমরা আপনার রিকোয়েস্ট দেখে দ্রুত আনলক করে দেব।
+        </p>
+      </div>
+
+      <div style="text-align:center;">
+        <a href="mailto:ssvaiss64@gmail.com?subject=IELTS%20REP%20-%20Prime%20Access%20Request&body=%E0%A6%86%E0%A6%AE%E0%A6%BF%20IELTS%20REP%20%E0%A6%93%E0%A6%AF%E0%A6%BC%E0%A7%87%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F%20%E0%A6%A5%E0%A7%87%E0%A6%95%E0%A7%87%20Prime%20Access%20%28299%20%E0%A6%9F%E0%A6%BE%E0%A6%95%E0%A6%BE%29%20%E0%A6%95%E0%A6%BF%E0%A6%A8%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%85%E0%A6%A8%E0%A7%81%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%B9%20%E0%A6%95%E0%A6%B0%E0%A7%87%20%E0%A6%86%E0%A6%AA%E0%A6%A8%E0%A6%BE%E0%A6%B0%20%E0%A6%AC%E0%A6%BF%E0%A6%95%E0%A6%BE%E0%A6%B6%20%E0%A6%A8%E0%A6%AE%E0%A7%8D%E0%A6%AC%E0%A6%B0%20%E0%A6%A6%E0%A6%BF%E0%A6%A8%2C%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20299%20%E0%A6%9F%E0%A6%BE%E0%A6%95%E0%A6%BE%20%E0%A6%A6%E0%A6%BF%E0%A6%AF%E0%A6%BC%E0%A7%87%20Prime%20Access%20%E0%A6%86%E0%A6%A8%E0%A6%B2%E0%A6%95%20%E0%A6%95%E0%A6%B0%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4%0A%E0%A6%A7%E0%A6%A8%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%BE%E0%A6%A6%E0%A5%A4"
+           style="display:inline-block;background:#16a34a;color:#fff;font-weight:600;padding:14px 28px;border-radius:50px;font-size:15px;box-shadow:0 4px 12px rgba(22,163,74,0.3);">
+          📧 Prime Access এর জন্য ইমেইল পাঠান
+        </a>
+      </div>
+
+      <p style="text-align:center;font-size:12px;color:#94a3b8;margin-top:16px;">
+        ইমেইল খুললে মেসেজ অটোমেটিক থাকবে। চাইলে আরও কিছু লিখে পাঠাতে পারবেন।
+      </p>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="section">
+    <div class="features-bottom">
+      <div class="feat-item">
+        <div class="icon">🎯</div>
+        <h4>Recent Exam Focus</h4>
+        <p>Practice real exam style passages and questions.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">📱</div>
+        <h4>Mobile Friendly</h4>
+        <p>Study anytime, anywhere on any device.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">📊</div>
+        <h4>Track Progress</h4>
+        <p>See your score and improve day by day.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">🛡️</div>
+        <h4>Secure & Reliable</h4>
+        <p>Your data and payment are 100% safe.</p>
+      </div>
+      <div class="feat-item">
+        <div class="icon">🎧</div>
+        <h4>24/7 Support</h4>
+        <p>We are always here to help you.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="logo-f">
+      <img src="logo.jpg" alt="IELTS REP" />
+      <div>
+        <div style="font-size:10px;color:#94a3b8;">IELTS RECENT EXAM</div>
+        <div style="font-weight:700;font-size:13px;color:#fff;">IELTS REP</div>
+      </div>
+    </div>
+    <p>© 2026 IELTS REP. All rights reserved.</p>
+    <p style="margin-top:4px;">Contact: ssvaiss64@gmail.com</p>
+  </footer>
+
+  <script>
+    // All 91 tests
+    const tests = [
+      { n: 1, t: "Effect and Cause", free: true },
+      { n: 2, t: "New filter promises clean water for millions", free: true },
+      { n: 3, t: "Ahead of its time", free: false },
+      { n: 4, t: "The life of Beatrix Potter", free: false },
+      { n: 5, t: "Effects of Changes in World Population", free: false },
+      { n: 6, t: "How Does Watching Sport Influence the Brain", free: false },
+      { n: 7, t: "SOSUS Listening to the Ocean", free: false },
+      { n: 8, t: "Practical Learning in the Classroom", free: false },
+      { n: 9, t: "The Life of Louis Braille", free: false },
+      { n: 10, t: "The Return of Monkey Life", free: false },
+      { n: 11, t: "Ecotourism", free: false },
+      { n: 12, t: "Biomimetics", free: false },
+      { n: 13, t: "Australia's cane toad problem", free: false },
+      { n: 14, t: "How a prehistoric predator took to the skies", free: false },
+      { n: 15, t: "Charles Darwin in the office", free: false },
+      { n: 16, t: "200 YEARS OF AUSTRALIAN LANDSCAPE", free: false },
+      { n: 17, t: "Why we love music", free: false },
+      { n: 18, t: "Yawning", free: false },
+      { n: 19, t: "Solving the problem of waste disposal", free: false },
+      { n: 20, t: "The story of Rubber", free: false },
+      { n: 21, t: "Ancient Storytelling", free: false },
+      { n: 22, t: "The Dunedin Study", free: false },
+      { n: 23, t: "The Olmec and their great stone heads", free: false },
+      { n: 24, t: "Carnivorous Plants", free: false },
+      { n: 25, t: "We have Star performers", free: false },
+      { n: 26, t: "The return of the black footed ferret", free: false },
+      { n: 27, t: "Learning from the Romans", free: false },
+      { n: 28, t: "Pacific navigation and voyaging", free: false },
+      { n: 29, t: "The History of Pencil", free: false },
+      { n: 30, t: "Tunnelling under the Thames", free: false },
+      { n: 31, t: "Mammoth Kill 2", free: false },
+      { n: 32, t: "The Development of Plastics", free: false },
+      { n: 33, t: "The Settlement and Development of Western Canada", free: false },
+      { n: 34, t: "The History of the Guitar", free: false },
+      { n: 35, t: "The problem of graffiti", free: false },
+      { n: 36, t: "The Remarkable Power of Placebos", free: false },
+      { n: 37, t: "The Origin of Paper", free: false },
+      { n: 38, t: "Multiple Intelligences", free: false },
+      { n: 39, t: "The Mbuti of the Ituri Forest in Zaire", free: false },
+      { n: 40, t: "How the Mind Ages", free: false },
+      { n: 41, t: "Ancient Rome", free: false },
+      { n: 42, t: "A Brief History of Humans and Food", free: false },
+      { n: 43, t: "A Brief History of Ballet", free: false },
+      { n: 44, t: "Extinct the Giant Deer", free: false },
+      { n: 45, t: "Children's Comprehension", free: false },
+      { n: 46, t: "Mind Music", free: false },
+      { n: 47, t: "Multi-tasking and the brain", free: false },
+      { n: 48, t: "A Brief History of Tea", free: false },
+      { n: 49, t: "The Tuatara of New Zealand", free: false },
+      { n: 50, t: "What are the 1,000 Foods to Eat Before You Die", free: false },
+      { n: 51, t: "Attine Ants", free: false },
+      { n: 52, t: "Australia's camouflaged creatures", free: false },
+      { n: 53, t: "Australian Parrots", free: false },
+      { n: 54, t: "Australia's Airborne Dentists", free: false },
+      { n: 55, t: "Company Innovation", free: false },
+      { n: 56, t: "Early Approaches to Organisational Design", free: false },
+      { n: 57, t: "Education Philosophy", free: false },
+      { n: 58, t: "Ensuring our future food supply", free: false },
+      { n: 59, t: "Health in the Wild", free: false },
+      { n: 60, t: "Language diversity", free: false },
+      { n: 61, t: "Nanotechnology", free: false },
+      { n: 62, t: "Robert Louis Stevenson", free: false },
+      { n: 63, t: "Science and Filmmaking", free: false },
+      { n: 64, t: "Synaesthesia", free: false },
+      { n: 65, t: "Termite Mounds", free: false },
+      { n: 66, t: "The Causes of Linguistic Change", free: false },
+      { n: 67, t: "The Effectiveness of an Online Course", free: false },
+      { n: 68, t: "The History of Dolls", free: false },
+      { n: 69, t: "The Power of Smell", free: false },
+      { n: 70, t: "Twin Study Two of a kind", free: false },
+      { n: 71, t: "Why Do We Need Sleep", free: false },
+      { n: 72, t: "Why Good Ideas Fail", free: false },
+      { n: 73, t: "Age proofing our brains", free: false },
+      { n: 74, t: "Barcode", free: false },
+      { n: 75, t: "Beyond the Blue Line", free: false },
+      { n: 76, t: "Big Data", free: false },
+      { n: 77, t: "Bird Migration", free: false },
+      { n: 78, t: "Book Review Dell Upton", free: false },
+      { n: 79, t: "Knowledge in Medicine", free: false },
+      { n: 80, t: "Mammoth Kill", free: false },
+      { n: 81, t: "Mark Strizic", free: false },
+      { n: 82, t: "Sleeping on the Job", free: false },
+      { n: 83, t: "Soap", free: false },
+      { n: 84, t: "The Exploration of Mars", free: false },
+      { n: 85, t: "The Extinction of Cave Bear", free: false },
+      { n: 86, t: "The Farmers", free: false },
+      { n: 87, t: "The Fashion Industry", free: false },
+      { n: 88, t: "The tuatara past and future", free: false },
+      { n: 89, t: "The Whale Goes to Court", free: false },
+      { n: 90, t: "Violins and Very Cold Weather", free: false },
+      { n: 91, t: "What Lucy Taught Us", free: false },
+    ];
+
+    let shown = tests.length; // show all tests
+
+    function renderTests() {
+      const grid = document.getElementById("testsGrid");
+      grid.innerHTML = "";
+      const toShow = tests.slice(0, shown);
+
+      toShow.forEach(test => {
+        const num = String(test.n).padStart(2, "0");
+        const isFree = test.free;
+        const card = document.createElement("div");
+        card.className = "test-card";
+        card.innerHTML = `
+          <div class="test-card-img">
+            <span class="badge ${isFree ? 'badge-free' : 'badge-prime'}">${isFree ? 'FREE' : '🔒 PRIME'}</span>
+          </div>
+          <div class="test-card-body">
+            <h3>Test ${num}</h3>
+            <div class="title">${test.t}</div>
+            <div class="meta">📖 Academic · Reading<br>📊 Medium · 📅 Sep 2026</div>
+            ${isFree
+              ? `<a href="test-0${test.n}.html" class="btn-test btn-free">Start Test →</a>`
+              : `<a href="#payment" class="btn-test btn-locked">🔒 Unlock to Access</a>`
+            }
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // Hide button if all shown
+      if (shown >= tests.length) {
+        document.getElementById("showMoreBtn").style.display = "none";
+      }
+    }
+
+    function showMore() {
+      shown = Math.min(shown + 12, tests.length);
+      renderTests();
+    }
+
+    function copyNumber() {
+      const number = "01746264515";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(number).then(() => {
+          showCopied();
+        }).catch(() => {
+          fallbackCopy(number);
+        });
+      } else {
+        fallbackCopy(number);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand("copy");
+        showCopied();
+      } catch (e) {
+        alert("কপি করতে পারেনি। নম্বরটি ম্যানুয়ালি কপি করুন: " + text);
+      }
+      document.body.removeChild(ta);
+    }
+
+    function showCopied() {
+      const btn = document.getElementById("copyBtn");
+      btn.textContent = "✓ বিকাশ নম্বর কপি হয়েছে!";
+      btn.classList.add("copied");
+      setTimeout(() => {
+        btn.textContent = "📋 Copy bKash Number";
+        btn.classList.remove("copied");
+      }, 2500);
+    }
+
+    // Init
+    renderTests();
+  </script>
+</body>
+</html>
